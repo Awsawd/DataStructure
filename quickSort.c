@@ -1,18 +1,23 @@
 #include <iostream>
 using namespace std;
 
-void quickSort(int arr[], int left, int right) {
-    if (left >= right) return; // 递归结束条件
-    int i = left, j = right, pivot = arr[left]; // 初始化i、j、pivot
-    while (i < j) {
-        while (i < j && arr[j] >= pivot) j--; // 找到第一个小于pivot的元素
-        if (i < j) arr[i++] = arr[j]; // 将小于pivot的元素放到左边
-        while (i < j && arr[i] <= pivot) i++; // 找到第一个大于pivot的元素
-        if (i < j) arr[j--] = arr[i]; // 将大于pivot的元素放到右边
+void quickSort(int* a,int low,int high)
+{
+    if (low >= high) return ;
+    int i = low, j = high;
+    int temp = a[i];
+
+    while (i<j)
+    {
+        while (i < j && a[j] >= temp) j--;
+        if (i < j) a[i++] = a[j];
+        while (i < j && a[i] <= temp) i++;
+        if (i < j) a[j--] = a[i];
     }
-    arr[i] = pivot; // 将基准元素放到最终位置
-    quickSort(arr, left, i - 1); // 对左半部分递归排序
-    quickSort(arr, i + 1, right); // 对右半部分递归排序
+    a[i] = temp;
+    quickSort(a, low, i - 1); 
+    quickSort(a, i + 1, high); 
+
 }
 
 int main() {
